@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -14,6 +14,14 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700"],
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-cormorant-garamond",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -40,7 +48,7 @@ export default function RootLayout({
   const rootLd = buildLocalBusinessJsonLd({ reviews: [], aggregateRating: null });
 
   return (
-    <html lang="de-CH" className={`${inter.variable} h-full antialiased`}>
+    <html lang="de-CH" className={`${inter.variable} ${cormorantGaramond.variable} h-full antialiased`}>
       <head>
         <JsonLd data={rootLd} />
       </head>

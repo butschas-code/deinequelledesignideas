@@ -6,20 +6,30 @@ const variants: Record<
   Variant,
   { className: string; innerGlow?: string }
 > = {
+  /**
+   * Warm sand — sits one step deeper than paper.
+   * Used for high-contrast "feature" sections.
+   */
   dawn: {
     className:
-      "bg-[linear-gradient(165deg,#f2fdf8_0%,#e8f8f0_35%,#fdf5f8_70%,#f8f2f5_100%)]",
+      "bg-[linear-gradient(165deg,#f5ece0_0%,#f0e5d5_40%,#f7f0e6_80%,#f5ece0_100%)]",
   },
+  /**
+   * Warm ecru — slightly lighter than dawn, gentle lift above base paper.
+   */
   meadow: {
     className:
-      "bg-[linear-gradient(160deg,#edf8f2_0%,#e2f5ec_40%,#f6fdfb_100%)]",
+      "bg-[linear-gradient(160deg,#fdfaf5_0%,#f7f0e5_45%,#f3ebe0_100%)]",
   },
+  /**
+   * Soft warm mist — barely-there tint, closest to paper-2.
+   */
   mist: {
     className:
-      "bg-[linear-gradient(180deg,#f6fdfb_0%,#eef8f4_50%,#fdf8fa_100%)]",
+      "bg-[linear-gradient(180deg,#fdfaf5_0%,#f8f3ea_50%,#f5efea_100%)]",
   },
   warmWhite: {
-    className: "bg-[linear-gradient(180deg,#ffffff_0%,#faf8f4_100%)]",
+    className: "bg-[linear-gradient(180deg,#fdfaf5_0%,#f7f3ec_100%)]",
   },
   /** Flächig, wie apple.com Produktseiten — ohne Verlaufs-Busy */
   appleWhite: {
@@ -54,12 +64,16 @@ export function EmotionalSection({
     <section className={`relative overflow-hidden ${v.className} ${className}`}>
       {showRadial ? (
         <>
+          {/* Warm honey glow — top-right */}
           <div
-            className="pointer-events-none absolute -right-[20%] top-0 h-[min(400px,50vh)] w-[min(500px,55vw)] rounded-full bg-[radial-gradient(circle,rgba(30,110,72,0.07),transparent_70%)] blur-2xl"
+            className="pointer-events-none absolute -right-[15%] -top-[10%] h-[min(380px,48vh)] w-[min(460px,52vw)] rounded-full blur-[96px]"
+            style={{ background: "radial-gradient(circle, rgba(198,158,110,0.09), transparent 68%)" }}
             aria-hidden
           />
+          {/* Warm terracotta glow — bottom-left */}
           <div
-            className="pointer-events-none absolute -left-[15%] bottom-0 h-[min(350px,45vh)] w-[min(450px,50vw)] rounded-full bg-[radial-gradient(circle,rgba(242,213,220,0.18),transparent_68%)] blur-2xl"
+            className="pointer-events-none absolute -left-[12%] bottom-0 h-[min(320px,42vh)] w-[min(420px,48vw)] rounded-full blur-[80px]"
+            style={{ background: "radial-gradient(circle, rgba(158,110,88,0.07), transparent 66%)" }}
             aria-hidden
           />
         </>

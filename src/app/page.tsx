@@ -4,27 +4,27 @@ import type { ReactNode } from "react";
 import { site } from "@/data/site";
 import { googleReviews, getReviewsSorted, formatReviewDate } from "@/data/googleReviews";
 import { SectionReveal } from "@/components/motion/SectionReveal";
-import { EmotionalSection } from "@/components/editorial/EmotionalSection";
 import { StorybrandHero } from "@/components/home/StorybrandHero";
+import { ParallaxQuoteBand } from "@/components/home/ParallaxQuoteBand";
 
-/* ─── Inline SVG icons for Wirkungsbereiche ─── */
+/* ─── SVG icons ─── */
 function IconZap() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
     </svg>
   );
 }
 function IconActivity() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
     </svg>
   );
 }
 function IconClock() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <circle cx="12" cy="12" r="10" />
       <polyline points="12 6 12 12 16 14" />
     </svg>
@@ -32,16 +32,15 @@ function IconClock() {
 }
 function IconHeart() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
     </svg>
   );
 }
 
-/* ─── Star row for review cards ─── */
 function StarRow({ rating }: { rating: 1 | 2 | 3 | 4 | 5 }) {
   return (
-    <span className="inline-flex gap-0.5 text-[14px] leading-none text-brand" aria-hidden>
+    <span className="inline-flex gap-0.5 text-[13px] leading-none" style={{ color: "#c49a58" }} aria-hidden>
       {Array.from({ length: 5 }, (_, i) => (
         <span key={i}>{i < rating ? "★" : "☆"}</span>
       ))}
@@ -49,7 +48,7 @@ function StarRow({ rating }: { rating: 1 | 2 | 3 | 4 | 5 }) {
   );
 }
 
-/* ─── Shared service card ─── */
+/* ─── Service card ─── */
 function ServiceCard({
   title, body, href, linkLabel, imageSrc, imageAlt, priority = false,
 }: {
@@ -57,32 +56,51 @@ function ServiceCard({
   imageSrc: string; imageAlt: string; priority?: boolean;
 }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-black/[0.07] bg-white/90 shadow-[0_8px_40px_-12px_rgba(30,110,72,0.13)] backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(30,110,72,0.18)]">
-      <div className="relative aspect-[25/18] w-full shrink-0 overflow-hidden">
+    <article
+      className="group flex h-full flex-col overflow-hidden rounded-[4px] border transition-all duration-500 hover:-translate-y-1.5"
+      style={{
+        background: "#ffffff",
+        borderColor: "rgba(0,0,0,0.07)",
+        boxShadow: "0 2px 16px rgba(0,0,0,0.055)",
+      }}
+      onMouseEnter={undefined}
+    >
+      <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden">
         <Image
           src={imageSrc}
           alt={imageAlt}
           fill
-          className="object-cover transition duration-500 group-hover:scale-[1.03]"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
           priority={priority}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#1e6e48]/14 via-transparent to-transparent" aria-hidden />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1e6e48]/40 via-[#1e6e48]/12 to-transparent" aria-hidden />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(105deg,transparent_0%,rgba(192,112,138,0.04)_40%,rgba(30,110,72,0.14)_100%)]" aria-hidden />
+        {/* Warm tint on hover */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{ background: "rgba(158,110,88,0.08)" }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "linear-gradient(180deg, transparent 45%, rgba(14,18,12,0.3) 100%)" }}
+          aria-hidden
+        />
       </div>
-      <div className="relative flex min-h-0 flex-1 flex-col px-5 pb-7 pt-5 sm:px-7 sm:pb-8 sm:pt-6">
-        <div className="pointer-events-none absolute -right-6 top-2 h-24 w-24 rounded-full bg-[radial-gradient(circle,rgba(30,110,72,0.07),transparent_70%)]" aria-hidden />
-        <h3 className="text-[1.075rem] font-semibold leading-snug tracking-[-0.02em] text-ink">
+      <div className="flex min-h-0 flex-1 flex-col px-7 pb-8 pt-6">
+        <h3
+          className="text-ink"
+          style={{ fontSize: "1.125rem", fontWeight: 500, letterSpacing: "-0.014em", lineHeight: 1.3 }}
+        >
           {title}
         </h3>
-        <p className="mt-3 flex-1 text-[14.5px] leading-relaxed text-ink-muted">{body}</p>
+        <p className="mt-3 flex-1 text-[15.5px] leading-[1.76] text-ink-muted">{body}</p>
         <Link
           href={href}
-          className="mt-6 inline-flex min-h-[44px] items-center text-[13.5px] font-semibold text-brand transition hover:gap-1"
+          className="mt-6 inline-flex items-center gap-1.5 text-[11.5px] font-semibold uppercase tracking-[0.1em] transition-all duration-200 group/link hover:gap-2.5"
+          style={{ color: "var(--brand)" }}
         >
-          {linkLabel}
-          <span className="ml-1 transition-transform group-hover:translate-x-0.5" aria-hidden>→</span>
+          {linkLabel.replace(/^→\s*/, "")}
+          <span aria-hidden>→</span>
         </Link>
       </div>
     </article>
@@ -96,34 +114,63 @@ function WirkungCard({
   icon: ReactNode; label: string; items: string[]; accentColor: string;
 }) {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-[1.2rem] bg-white shadow-[0_6px_28px_rgba(30,110,72,0.09)] transition duration-200 hover:shadow-[0_10px_36px_rgba(30,110,72,0.14)]">
-      {/* Colored header band */}
-      <div
-        style={{ background: `linear-gradient(135deg, ${accentColor}f2 0%, ${accentColor}b8 100%)` }}
-        className="px-5 pb-4 pt-5"
-      >
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/22 text-white">
+    <div
+      className="flex h-full flex-col overflow-hidden rounded-[4px] border transition-all duration-400 hover:-translate-y-1"
+      style={{
+        background: "#ffffff",
+        borderColor: "rgba(0,0,0,0.07)",
+        boxShadow: "0 2px 14px rgba(0,0,0,0.06)",
+      }}
+    >
+      {/* Accent top stripe */}
+      <div style={{ height: "2px", background: accentColor, opacity: 0.65 }} aria-hidden />
+
+      <div className="flex flex-1 flex-col p-6">
+        {/* Icon square */}
+        <div
+          className="flex h-10 w-10 items-center justify-center rounded-[4px]"
+          style={{
+            background: `${accentColor}14`,
+            color: accentColor,
+          }}
+        >
           {icon}
         </div>
-        <h3 className="mt-3 text-[0.9rem] font-bold tracking-[-0.01em] text-white">
+
+        <h3
+          className="mt-4 text-ink"
+          style={{
+            fontSize: "0.75rem",
+            fontWeight: 700,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase" as const,
+            opacity: 0.72,
+          }}
+        >
           {label}
         </h3>
-      </div>
-      {/* Items as clean ruled rows */}
-      <div className="flex flex-col px-5 py-3">
-        {items.map((item, i) => (
-          <div
-            key={item}
-            className="flex items-center gap-3 py-2.5"
-            style={{ borderBottom: i < items.length - 1 ? '1px solid rgba(0,0,0,0.06)' : 'none' }}
-          >
-            <div
-              style={{ background: accentColor }}
-              className="h-1.5 w-1.5 shrink-0 rounded-full opacity-55"
-            />
-            <span className="text-[13px] leading-snug text-ink">{item}</span>
-          </div>
-        ))}
+
+        <ul className="mt-4 space-y-0">
+          {items.map((item, i) => (
+            <li
+              key={item}
+              className="flex items-center gap-2.5 py-2.5"
+              style={{ borderTop: i > 0 ? "1px solid rgba(0,0,0,0.05)" : "none" }}
+            >
+              <span
+                className="h-px w-3 shrink-0"
+                style={{ background: accentColor, opacity: 0.45 }}
+                aria-hidden
+              />
+              <span
+                className="text-ink"
+                style={{ fontSize: "14.5px", lineHeight: 1.42, opacity: 0.84 }}
+              >
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -135,82 +182,105 @@ function WirkungCard({
 export default function HomePage() {
   return (
     <>
-      {/* ── S1: HERO ────────────────────────────── */}
+      {/* ── S1: HERO — dark full-bleed parallax ── */}
       <StorybrandHero />
 
-      {/* ── S2: STAKES ─────────────────────────────
-          Atmospheric background image at very low opacity
-          behind the dawn-gradient to add warmth.
-      ─────────────────────────────────────────── */}
+      {/* ── S2: STAKES — subtle warm gradient, centered quote ── */}
       <section
-        className="relative overflow-hidden py-20 sm:py-24 md:py-32"
+        className="py-20 sm:py-24 md:py-32"
         style={{
-          background:
-            "linear-gradient(165deg,#fdfbf7 0%,#f5f0e8 35%,#eef4ef 70%,#f8f6f1 100%)",
+          background: [
+            "radial-gradient(ellipse 80% 80% at 50% -10%, rgba(215,185,148,0.38) 0%, transparent 58%),",
+            "linear-gradient(180deg, #fdfaf5 0%, #f7f3ec 100%)",
+          ].join(""),
         }}
       >
-        {/* Very faint atmospheric photo */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.055]" aria-hidden>
-          <Image
-            src="/images/legacy/wp/2022/10/claudia_dimmler_cj_2022-140_klein.jpg"
-            alt=""
-            fill
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        </div>
-        {/* Soft radial mask so text stays readable */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 90% 80% at 50% 50%, rgba(253,251,247,0.96), rgba(253,251,247,0.76))",
-          }}
-          aria-hidden
-        />
-        {/* Existing radial accents from EmotionalSection "dawn" */}
-        <div className="pointer-events-none absolute -right-[20%] top-0 h-[min(400px,50vh)] w-[min(500px,55vw)] rounded-full bg-[radial-gradient(circle,rgba(30,110,72,0.06),transparent_70%)] blur-2xl" aria-hidden />
-        <div className="pointer-events-none absolute -left-[15%] bottom-0 h-[min(350px,45vh)] w-[min(450px,50vw)] rounded-full bg-[radial-gradient(circle,rgba(242,213,220,0.14),transparent_68%)] blur-2xl" aria-hidden />
-
-        <div className="page-gutter relative z-[1] mx-auto w-full max-w-[var(--layout-narrow)]">
+        <div className="page-gutter mx-auto w-full max-w-[var(--layout-narrow)]">
           <SectionReveal>
             <p className="section-eyebrow text-center">Die Ausgangslage</p>
-            <p className="mt-8 text-center text-[1.2rem] font-medium leading-[1.75] tracking-[-0.01em] text-ink sm:text-[1.35rem] md:text-[1.5rem] md:leading-[1.7]">
-              Unser Alltag ist voller Reize. Das Tempo ist hoch. Viele Menschen spüren, dass Körper und Geist aus dem Gleichgewicht geraten sind — oft äussert sich dies als Verspannung, Erschöpfung oder eine anhaltende innere Unruhe.
+            <blockquote
+              className="mx-auto mt-8 text-center text-ink"
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontWeight: 300,
+                fontStyle: "italic",
+                fontSize: "clamp(1.55rem, 3.4vw, 2.6rem)",
+                lineHeight: 1.5,
+                letterSpacing: "0.01em",
+                maxWidth: "34ch",
+              }}
+            >
+              «Unser Alltag ist voller Reize. Das Tempo ist hoch. Viele
+              spüren, dass Körper und Geist aus dem Gleichgewicht geraten
+              sind.»
+            </blockquote>
+            <p
+              className="mx-auto mt-6 text-center text-ink-muted"
+              style={{ fontSize: "16.5px", lineHeight: 1.78, maxWidth: "44ch" }}
+            >
+              Der erste Schritt zurück beginnt damit, sich bewusst Zeit zu
+              nehmen und den Fokus wieder nach innen zu richten.
             </p>
-            <p className="mt-6 text-center text-[1.05rem] leading-[1.75] text-ink-muted sm:text-[1.125rem]">
-              Der erste Schritt zurück beginnt damit, sich bewusst Zeit zu nehmen und den Fokus wieder nach innen zu richten.
-            </p>
+
+            <div className="mt-10 flex items-center justify-center gap-4">
+              <span
+                className="h-px flex-1"
+                style={{ background: "var(--line)", maxWidth: "72px" }}
+                aria-hidden
+              />
+              <span
+                className="h-1.5 w-1.5 rounded-full"
+                style={{ background: "var(--brand-complimentary)", opacity: 0.4 }}
+                aria-hidden
+              />
+              <span
+                className="h-px flex-1"
+                style={{ background: "var(--line)", maxWidth: "72px" }}
+                aria-hidden
+              />
+            </div>
           </SectionReveal>
         </div>
       </section>
 
-      {/* ── S3: ANGEBOT ─────────────────────────── */}
-      <section id="angebot" className="py-16 sm:py-20 md:py-28">
+      {/* ── S3: ANGEBOT — warm ivory with ambient glow bottom-left ── */}
+      <section
+        id="angebot"
+        className="py-20 sm:py-24 md:py-32"
+        style={{
+          background: [
+            "radial-gradient(ellipse 80% 60% at -5% 110%, rgba(200,170,135,0.32) 0%, transparent 52%),",
+            "var(--paper)",
+          ].join(""),
+        }}
+      >
         <div className="page-gutter mx-auto w-full max-w-[var(--layout-max)]">
           <SectionReveal>
-            <p className="section-eyebrow">Das Angebot</p>
-            <h2 className="section-title mt-2 max-w-[26ch]">Was ich für dich bereithabe</h2>
-            <p className="mt-5 max-w-xl text-[17px] leading-[1.65] text-ink-muted">
-              Drei Wege zurück zu dir — du wählst, was zu deinem Anliegen passt.
-            </p>
+            <div className="flex items-end justify-between gap-6 sm:flex-row">
+              <div>
+                <p className="section-eyebrow">Das Angebot</p>
+                <h2 className="section-title mt-2 max-w-[22ch]">
+                  Was ich für dich bereithabe
+                </h2>
+              </div>
+            </div>
           </SectionReveal>
 
-          <div className="mt-12 grid auto-rows-fr gap-5 sm:mt-16 sm:gap-6 md:grid-cols-3">
+          <div className="mt-12 grid gap-5 sm:mt-14 sm:gap-6 md:grid-cols-3">
             {[
               {
                 title: "Hatha Yoga mit Pratyahara-Meditation",
                 body: "Ein ganzheitliches System aus sanften Körperübungen, Atemtechniken und Yoga Nidra. Es hilft dabei, die Sinne von äusseren Reizen zurückzuziehen und tiefe Entspannung zu finden.",
                 href: "/leistungen/yoga",
-                linkLabel: "→ Details & Kurszeiten",
+                linkLabel: "Details & Kurszeiten",
                 imageSrc: "/images/legacy/photos/hatha-yoga-preview.jpg",
-                imageAlt: "Hatha Yoga — Praxis in Adligenswil",
+                imageAlt: "Hatha Yoga in Adligenswil",
               },
               {
                 title: "Kinesiologie — Komplementärtherapie",
                 body: "Durch gezielte Therapieeinheiten und den kinesiologischen Muskeltest werden physische, mentale und emotionale Blockaden gelöst. Ziel ist es, die Selbstregulation des Körpers zu stärken.",
                 href: "/leistungen/kinesiologie",
-                linkLabel: "→ Mehr zur Methode",
+                linkLabel: "Mehr zur Methode",
                 imageSrc: "/images/legacy/photos/claudia-347.jpg",
                 imageAlt: "Claudia Dimmler — Kinesiologie Adligenswil",
               },
@@ -218,12 +288,12 @@ export default function HomePage() {
                 title: "Sportkinesiologie",
                 body: "Optimierung von Bewegungsabläufen und mentaler Stärke. Zur Leistungssteigerung, schnelleren Regeneration oder zur Vorbereitung auf Wettkämpfe.",
                 href: "/leistungen/sport-kinesiologie",
-                linkLabel: "→ Details für Sportler",
+                linkLabel: "Details für Sportler",
                 imageSrc: "/images/legacy/wp/2022/10/DeinQuelle-1561-scaled.jpg",
                 imageAlt: "Sportkinesiologie — Bewegung und Leistung",
               },
             ].map((card, i) => (
-              <SectionReveal key={card.href} delay={i * 0.07} className="h-full">
+              <SectionReveal key={card.href} delay={i * 0.08} className="h-full">
                 <ServiceCard {...card} priority={i === 0} />
               </SectionReveal>
             ))}
@@ -231,24 +301,29 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── S4: GUIDE (Claudia) — layered photo composition ─ */}
-      <EmotionalSection
-        variant="meadow"
-        className="border-y border-black/[0.05] py-16 sm:py-20 md:py-28"
+      {/* ── PARALLAX QUOTE BAND — cinematic break ── */}
+      <ParallaxQuoteBand />
+
+      {/* ── S4: GUIDE (Claudia) — warm ecru, layered photos ── */}
+      <section
+        className="py-20 sm:py-24 md:py-32"
+        style={{ background: "linear-gradient(160deg, #fdfaf5 0%, #f7f0e5 50%, #f3ebe0 100%)" }}
       >
         <div className="page-gutter mx-auto w-full max-w-[var(--layout-max)]">
-          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16 lg:gap-20">
+          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
 
-            {/* ── Layered photo composition ── */}
+            {/* Layered photo composition */}
             <SectionReveal className="order-2 md:order-1">
-              {/*
-                Outer container: extra padding-bottom on mobile so the
-                overlapping secondary photo isn't clipped.
-              */}
               <div className="relative mx-auto max-w-[420px] pb-16 md:max-w-none md:pb-0">
 
                 {/* Primary portrait */}
-                <div className="relative aspect-[3/4] w-[88%] overflow-hidden rounded-[1.5rem] shadow-[0_24px_72px_-16px_rgba(30,110,72,0.26)] md:ml-auto">
+                <div
+                  className="relative aspect-[3/4] w-[88%] overflow-hidden rounded-[4px] md:ml-auto"
+                  style={{
+                    boxShadow:
+                      "0 28px 80px -16px rgba(58,92,61,0.28), 0 8px 24px -6px rgba(0,0,0,0.12)",
+                  }}
+                >
                   <Image
                     src="/images/legacy/photos/claudia-portrait-036.jpg"
                     alt="Claudia Dimmler — Komplementärtherapeutin und Yogalehrerin"
@@ -256,87 +331,125 @@ export default function HomePage() {
                     className="object-cover object-top"
                     sizes="(max-width: 768px) 78vw, 380px"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/14 via-transparent to-transparent" aria-hidden />
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(14,26,16,0.18) 0%, transparent 40%)",
+                    }}
+                    aria-hidden
+                  />
                 </div>
 
-                {/* Secondary overlapping photo — bottom-left, white border, slight rotation, intrinsic ratio */}
+                {/* Overlapping secondary photo */}
                 <div
-                  className="absolute -bottom-6 left-0 w-[52%] overflow-hidden rounded-[1.1rem] border-[4px] border-white shadow-[0_12px_48px_rgba(30,110,72,0.20)]"
-                  style={{ transform: "rotate(-2deg)" }}
+                  className="absolute -bottom-6 left-0 w-[52%] overflow-hidden rounded-[4px] border-[4px] border-white"
+                  style={{
+                    transform: "rotate(-2deg)",
+                    boxShadow: "0 12px 48px rgba(58,92,61,0.22)",
+                  }}
                 >
                   <Image
                     src="/images/legacy/photos/claudia-149.jpg"
                     alt="Claudia Dimmler in der Praxis"
                     width={1920}
                     height={929}
-                    className="w-full h-auto"
+                    className="h-auto w-full"
                     sizes="220px"
                   />
                 </div>
 
-                {/* Decorative soft glow behind the composition */}
+                {/* Decorative glow */}
                 <div
-                  className="pointer-events-none absolute -right-4 top-10 h-32 w-32 rounded-full bg-brand-secondary/40 blur-3xl"
+                  className="pointer-events-none absolute -right-4 top-8 h-36 w-36 rounded-full blur-3xl"
+                  style={{ background: "rgba(58,92,61,0.22)" }}
                   aria-hidden
                 />
               </div>
             </SectionReveal>
 
-            {/* ── Text ── */}
-            <SectionReveal className="order-1 md:order-2" delay={0.08}>
+            {/* Text */}
+            <SectionReveal className="order-1 md:order-2" delay={0.1}>
               <p className="section-eyebrow">Deine Begleitung</p>
               <h2 className="section-title mt-2">Über Claudia Dimmler</h2>
 
-              <p className="mt-6 text-[16px] leading-[1.78] text-ink-muted">
-                Als diplomierte Komplementärtherapeutin und Yogalehrerin verbinde ich medizinisches Fachwissen mit feinstofflicher Arbeit. Ursprünglich als medizinische Praxisassistentin tätig, fand ich über Yoga Nidra und die Kinesiologie meinen eigenen Weg zu neuer Kraft und innerer Ruhe.
+              <p
+                className="mt-6 text-ink-muted"
+                style={{ fontSize: "17px", lineHeight: 1.76 }}
+              >
+                Als diplomierte Komplementärtherapeutin und Yogalehrerin verbinde
+                ich medizinisches Fachwissen mit feinstofflicher Arbeit. Ursprünglich
+                als medizinische Praxisassistentin tätig, fand ich über Yoga Nidra
+                und die Kinesiologie meinen eigenen Weg zu neuer Kraft und innerer Ruhe.
               </p>
 
-              <blockquote className="mt-7 border-l-2 border-brand/45 pl-5">
-                <p className="text-[15.5px] italic leading-[1.72] text-ink">
-                  «Yoga und Kinesiologie haben mir gezeigt, wie viel Energie wir freisetzen können, wenn wir unsere eigene Quelle wiederentdecken. Dieses Wissen gebe ich heute in meiner Praxis in Adligenswil weiter.»
-                </p>
-              </blockquote>
-
-              <ul className="mt-8 space-y-2.5">
+              <ul className="mt-9 space-y-3.5">
                 {[
                   "Dipl. Komplementärtherapeutin Kinesiologie AKT",
                   "Zertifizierte Satyananda Yoga® Lehrerin",
-                  "Langjährige Erfahrung als MPA",
+                  "Langjährige Erfahrung als Medizinische Praxisassistentin",
                   "Mitglied KineSuisse & EMR-anerkannt",
                 ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[14.5px] leading-snug text-ink-muted">
-                    <span className="mt-0.5 flex-none font-semibold text-brand" aria-hidden>✓</span>
+                  <li
+                    key={item}
+                    className="flex items-center gap-3"
+                    style={{ fontSize: "15.5px", color: "var(--ink-muted)" }}
+                  >
+                    <span
+                      className="h-px w-4 shrink-0"
+                      style={{ background: "var(--brand)", opacity: 0.5 }}
+                      aria-hidden
+                    />
                     {item}
                   </li>
                 ))}
               </ul>
+
+              <div className="mt-10">
+                <Link
+                  href="/ueber-mich"
+                  className="group inline-flex h-[46px] items-center gap-3 rounded-[4px] border px-6 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-ink transition-all duration-300 hover:border-brand/30 hover:bg-brand/5"
+                  style={{ borderColor: "rgba(0,0,0,0.12)" }}
+                >
+                  Mehr über mich
+                  <span
+                    className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-black/5 transition-transform duration-300 group-hover:translate-x-0.5"
+                    aria-hidden
+                  >
+                    →
+                  </span>
+                </Link>
+              </div>
             </SectionReveal>
           </div>
         </div>
-      </EmotionalSection>
+      </section>
 
-      {/* ── S5: PLAN (3 Schritte) — step circles + connector ─ */}
-      <section className="py-16 sm:py-20 md:py-28">
+      {/* ── S5: PLAN (3 Schritte) — paper-2 with top-right warmth ── */}
+      <section
+        className="py-20 sm:py-24 md:py-32"
+        style={{
+          background: [
+            "radial-gradient(ellipse 75% 65% at 105% -5%, rgba(205,175,140,0.28) 0%, transparent 50%),",
+            "var(--paper-2)",
+          ].join(""),
+        }}
+      >
         <div className="page-gutter mx-auto w-full max-w-[var(--layout-max)]">
           <SectionReveal>
             <p className="section-eyebrow">In 3 Schritten</p>
             <h2 className="section-title mt-2">So einfach geht es los</h2>
           </SectionReveal>
 
-          {/*
-            Connector: a dashed line sitting behind the grid at badge-center
-            height (~53px from grid top). Visible only in the 24px column gaps.
-            Cards have bg-white which hides the line inside them — creating a
-            subtle dotted "path" between steps.
-          */}
           <div className="relative mt-12 sm:mt-14">
+            {/* Connector line */}
             <div
               className="pointer-events-none absolute inset-x-0 hidden md:block"
               style={{
-                top: "53px",
+                top: "50px",
                 height: "1px",
                 backgroundImage:
-                  "repeating-linear-gradient(90deg, rgba(30,110,72,0.20) 0px, rgba(30,110,72,0.20) 6px, transparent 6px, transparent 14px)",
+                  "repeating-linear-gradient(90deg, rgba(58,92,61,0.18) 0px, rgba(58,92,61,0.18) 6px, transparent 6px, transparent 14px)",
               }}
               aria-hidden
             />
@@ -344,34 +457,40 @@ export default function HomePage() {
             <div className="grid gap-5 sm:gap-6 md:grid-cols-3">
               {[
                 {
-                  num: "1",
+                  num: "01",
                   title: "Termin wählen",
                   body: "Buche deine erste Sitzung oder Yogalektion unkompliziert über das Online-Tool.",
                   cta: { label: "Hier online buchen", href: site.bookingUrl, external: true },
                 },
                 {
-                  num: "2",
+                  num: "02",
                   title: "Ankommen & Analysieren",
                   body: "In der ersten Begegnung besprechen wir dein Anliegen und definieren gemeinsam den Weg.",
                   cta: null,
                 },
                 {
-                  num: "3",
+                  num: "03",
                   title: "Gleichgewicht finden",
                   body: "Durch gezielte Übungen oder Therapie lösen wir Blockaden und stärken deine Ressourcen nachhaltig.",
                   cta: null,
                 },
               ].map((step, i) => (
-                <SectionReveal key={step.num} delay={i * 0.09}>
-                  <div className="flex h-full flex-col rounded-[1.25rem] border border-black/[0.07] bg-white p-7 shadow-[0_8px_40px_-12px_rgba(30,110,72,0.10)] sm:p-8">
-                    {/* Step badge: ring-4 ring-white visually separates it from the connector */}
-                    <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-[1.0625rem] font-bold text-brand ring-4 ring-white">
-                      {step.num}
-                    </div>
-                    <h3 className="mt-5 text-[1.0625rem] font-semibold tracking-[-0.02em] text-ink">
+                <SectionReveal key={step.num} delay={i * 0.1}>
+                  <div
+                    className="flex h-full flex-col rounded-[4px] border p-7 sm:p-8"
+                    style={{
+                      background: "#ffffff",
+                      borderColor: "rgba(0,0,0,0.07)",
+                      boxShadow: "0 2px 16px rgba(0,0,0,0.06)",
+                    }}
+                  >
+                    <h3
+                      className="text-ink"
+                      style={{ fontSize: "1.125rem", fontWeight: 500, letterSpacing: "-0.012em" }}
+                    >
                       {step.title}
                     </h3>
-                    <p className="mt-3 flex-1 text-[14.5px] leading-relaxed text-ink-muted">
+                    <p className="mt-3 flex-1 text-[16px] leading-[1.76] text-ink-muted">
                       {step.body}
                     </p>
                     {step.cta && (
@@ -379,7 +498,7 @@ export default function HomePage() {
                         href={step.cta.href}
                         target={step.cta.external ? "_blank" : undefined}
                         rel={step.cta.external ? "noopener noreferrer" : undefined}
-                        className="mt-6 inline-flex min-h-[44px] items-center rounded-full bg-brand px-5 text-[13.5px] font-semibold text-white transition hover:bg-brand-hover"
+                        className="mt-6 inline-flex h-[42px] items-center rounded-[4px] bg-brand px-5 text-[11.5px] font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-brand-hover"
                       >
                         {step.cta.label}
                       </a>
@@ -392,17 +511,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── S6: WIRKUNGSBEREICHE — cards with icons + pill items ─ */}
-      <EmotionalSection
-        variant="dawn"
-        className="border-y border-black/[0.05] py-16 sm:py-20 md:py-28"
+      {/* ── S6: WIRKUNGSBEREICHE — warm sand ── */}
+      <section
+        className="py-20 sm:py-24 md:py-32"
+        style={{
+          background:
+            "linear-gradient(165deg, #f5ece0 0%, #f0e5d5 40%, #f7f0e6 80%, #f5ece0 100%)",
+        }}
       >
         <div className="page-gutter mx-auto w-full max-w-[var(--layout-max)]">
           <SectionReveal>
             <p className="section-eyebrow">Wirkungsbereiche</p>
             <h2 className="section-title mt-2">Wo Yoga & Kinesiologie helfen</h2>
-            <p className="mt-4 max-w-lg text-[16px] leading-[1.65] text-ink-muted">
-              Von Stressbewältigung bis Lebensübergängen — die Methoden sind vielseitig einsetzbar.
+            <p
+              className="mt-4 text-ink-muted"
+              style={{ maxWidth: "46ch", fontSize: "17px", lineHeight: 1.65 }}
+            >
+              Von Stressbewältigung bis Lebensübergängen — die Methoden sind
+              vielseitig einsetzbar.
             </p>
           </SectionReveal>
 
@@ -412,46 +538,53 @@ export default function HomePage() {
                 icon: <IconZap />,
                 label: "Mental",
                 items: ["Konzentration", "Motivation", "Selbstwert", "Stressbewältigung"],
-                accentColor: "#1e6e48",
+                accentColor: "#3a5c3d",
               },
               {
                 icon: <IconActivity />,
                 label: "Körperlich",
                 items: ["Schmerzen", "Verspannungen", "Schlafstörungen", "Erschöpfung"],
-                accentColor: "#5a8040",
+                accentColor: "#4e7250",
               },
               {
                 icon: <IconClock />,
                 label: "Lebensphasen",
                 items: ["Kinderwunsch", "Schwangerschaft", "Pubertät", "Wechseljahre", "Neuorientierung"],
-                accentColor: "#b07838",
+                accentColor: "#9e6e58",
               },
               {
                 icon: <IconHeart />,
                 label: "Emotionen",
                 items: ["Ängste", "Stimmungsschwankungen", "Trauerverarbeitung"],
-                accentColor: "#c0708a",
+                accentColor: "#7a5c6e",
               },
             ].map((col, i) => (
-              <SectionReveal key={col.label} delay={i * 0.07}>
+              <SectionReveal key={col.label} delay={i * 0.08}>
                 <WirkungCard {...col} />
               </SectionReveal>
             ))}
           </div>
         </div>
-      </EmotionalSection>
+      </section>
 
-      {/* ── S7: ERFOLG — split layout: text left, photo right ─── */}
-      <section className="overflow-hidden py-16 sm:py-20 md:py-28">
+      {/* ── S7: ERFOLG — paper with bottom-left amber warmth ── */}
+      <section
+        className="overflow-hidden py-20 sm:py-24 md:py-32"
+        style={{
+          background: [
+            "radial-gradient(ellipse 85% 70% at 100% 105%, rgba(205,175,135,0.3) 0%, transparent 50%),",
+            "var(--paper)",
+          ].join(""),
+        }}
+      >
         <div className="page-gutter mx-auto w-full max-w-[var(--layout-max)]">
-          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16 lg:gap-20">
+          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
 
-            {/* Text left */}
             <SectionReveal>
               <p className="section-eyebrow">Was sich verändert</p>
               <h2 className="section-title mt-2">Dein Leben nach der Behandlung</h2>
 
-              <ul className="mt-8 space-y-5 sm:mt-10">
+              <ul className="mt-9 space-y-5 sm:mt-10">
                 {[
                   "Du gewinnst an Klarheit und innerer Ruhe.",
                   "Dein Körper fühlt sich geschmeidiger und belastbarer an.",
@@ -459,20 +592,29 @@ export default function HomePage() {
                   "Du kennst Werkzeuge, um im Alltag gelassen zu bleiben.",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-4">
-                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-[13px] font-semibold text-white shadow-sm">
-                      ✓
-                    </span>
-                    <p className="text-[16.5px] leading-[1.65] text-ink">{item}</p>
+                    <span
+                      className="mt-[7px] h-px w-5 shrink-0"
+                      style={{ background: "var(--brand)", opacity: 0.55 }}
+                      aria-hidden
+                    />
+                    <p style={{ fontSize: "17px", lineHeight: 1.68, color: "var(--ink)" }}>
+                      {item}
+                    </p>
                   </li>
                 ))}
               </ul>
             </SectionReveal>
 
-            {/* Photo right — layered composition */}
-            <SectionReveal delay={0.09}>
+            {/* Layered photos */}
+            <SectionReveal delay={0.1}>
               <div className="relative mx-auto max-w-[400px] pb-16 md:max-w-none md:pb-0">
-                {/* Primary photo */}
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] shadow-[0_24px_72px_-16px_rgba(30,110,72,0.24)]">
+                <div
+                  className="relative aspect-[4/5] overflow-hidden rounded-[4px]"
+                  style={{
+                    boxShadow:
+                      "0 28px 80px -16px rgba(58,92,61,0.24), 0 6px 20px rgba(0,0,0,0.08)",
+                  }}
+                >
                   <Image
                     src="/images/legacy/photos/claudia-302.jpg"
                     alt="Claudia Dimmler — Wohlbefinden und Gleichgewicht"
@@ -480,27 +622,36 @@ export default function HomePage() {
                     className="object-cover object-center"
                     sizes="(max-width: 768px) 90vw, 420px"
                   />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/12 via-transparent to-transparent" aria-hidden />
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgba(14,26,16,0.15), transparent 40%)",
+                    }}
+                    aria-hidden
+                  />
                 </div>
 
-                {/* Floating overlay — bottom-right, intrinsic ratio, slight rotation */}
                 <div
-                  className="absolute -bottom-12 right-0 w-[54%] overflow-hidden rounded-[1.1rem] border-[4px] border-white shadow-[0_12px_48px_rgba(30,110,72,0.20)]"
-                  style={{ transform: "rotate(2deg)" }}
+                  className="absolute -bottom-10 right-0 w-[52%] overflow-hidden rounded-[4px] border-[4px] border-white"
+                  style={{
+                    transform: "rotate(2deg)",
+                    boxShadow: "0 12px 48px rgba(58,92,61,0.2)",
+                  }}
                 >
                   <Image
                     src="/images/legacy/wp/2022/10/20200419_131335101_iOS-scaled.jpg"
                     alt="Kinesiologie — Instrumente und Notizbücher"
                     width={2560}
                     height={1920}
-                    className="w-full h-auto"
+                    className="h-auto w-full"
                     sizes="240px"
                   />
                 </div>
 
-                {/* Decorative glow */}
                 <div
-                  className="pointer-events-none absolute -bottom-6 -left-6 h-32 w-32 rounded-full bg-brand-secondary/35 blur-3xl"
+                  className="pointer-events-none absolute -bottom-6 -left-6 h-32 w-32 rounded-full blur-3xl"
+                  style={{ background: "rgba(58,92,61,0.2)" }}
                   aria-hidden
                 />
               </div>
@@ -509,12 +660,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── S8: TESTIMONIALS — real Google reviews ──────── */}
+      {/* ── S8: TESTIMONIALS — warm mist ── */}
       {(() => {
         const reviewsWithText = getReviewsSorted(googleReviews).filter(
           (r) => r.reviewBody.trim().length > 5,
         );
-        // Feature the longest (most detailed) review; rest sorted newest-first
         const featured = [...reviewsWithText].sort(
           (a, b) => b.reviewBody.length - a.reviewBody.length,
         )[0];
@@ -523,44 +673,96 @@ export default function HomePage() {
         if (!featured) return null;
 
         return (
-          <EmotionalSection
-            variant="meadow"
-            className="border-y border-black/[0.05] py-16 sm:py-20 md:py-28"
+          <section
+            className="py-20 sm:py-24 md:py-32"
+            style={{
+              background:
+                "linear-gradient(180deg, #fdfaf5 0%, #f8f3ea 50%, #f5efea 100%)",
+            }}
           >
             <div className="page-gutter mx-auto w-full max-w-[var(--layout-max)]">
               <SectionReveal>
                 <p className="section-eyebrow">Kundenstimmen</p>
                 <h2 className="section-title mt-2">Was meine Klientinnen sagen</h2>
-                <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">
+                <p
+                  className="mt-4 text-ink-muted"
+                  style={{ fontSize: "16.5px", lineHeight: 1.72 }}
+                >
                   Echte Stimmen von Google — ungekürzt und unverändert.
                 </p>
               </SectionReveal>
 
-              <div className="mt-12 space-y-5 sm:space-y-6">
-                {/* Featured review — full width */}
+              <div className="mt-12 space-y-5 sm:mt-14 sm:space-y-6">
+                {/* Featured review */}
                 <SectionReveal>
-                  <figure className="relative overflow-hidden rounded-[1.35rem] border border-black/[0.06] bg-white/88 p-8 shadow-[0_8px_40px_-12px_rgba(30,110,72,0.12)] backdrop-blur-sm sm:p-10 md:p-12">
+                  <figure
+                    className="relative overflow-hidden rounded-[4px] border p-8 sm:p-12 md:p-14"
+                    style={{
+                      background: "#ffffff",
+                      borderColor: "rgba(0,0,0,0.06)",
+                      boxShadow: "0 4px 32px rgba(0,0,0,0.06)",
+                    }}
+                  >
+                    {/* Oversized opening quote — atmosphere only */}
                     <div
-                      className="pointer-events-none absolute right-6 top-2 select-none text-[9rem] font-bold leading-none text-brand/[0.065] sm:right-10 sm:top-4"
+                      className="pointer-events-none absolute right-8 top-0 select-none leading-none"
+                      style={{
+                        fontFamily: "var(--font-cormorant)",
+                        fontSize: "11rem",
+                        fontWeight: 300,
+                        color: "var(--brand)",
+                        opacity: 0.06,
+                        lineHeight: 1,
+                      }}
                       aria-hidden
                     >
                       &ldquo;
                     </div>
-                    <div className="mb-4 flex items-center gap-2">
+
+                    <div className="mb-5 flex items-center gap-2">
                       <StarRow rating={featured.reviewRating} />
                       <span className="sr-only">{featured.reviewRating} von 5 Sternen</span>
                     </div>
-                    <blockquote className="relative">
-                      <p className="max-w-3xl whitespace-pre-line text-[1.05rem] italic leading-[1.82] text-ink sm:text-[1.15rem] md:text-[1.2rem]">
+
+                    <blockquote>
+                      <p
+                        className="max-w-3xl whitespace-pre-line text-ink"
+                        style={{
+                          fontFamily: "var(--font-cormorant)",
+                          fontWeight: 300,
+                          fontStyle: "italic",
+                          fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)",
+                          lineHeight: 1.66,
+                          letterSpacing: "0.004em",
+                        }}
+                      >
                         {featured.reviewBody}
                       </p>
                     </blockquote>
-                    <figcaption className="mt-7 flex items-center gap-3">
-                      <div className="h-px w-8 bg-brand/35" aria-hidden />
+
+                    <figcaption className="mt-8 flex items-center gap-3">
+                      <div
+                        className="h-px w-6"
+                        style={{
+                          background: "var(--brand-complimentary)",
+                          opacity: 0.45,
+                        }}
+                        aria-hidden
+                      />
                       <div>
-                        <p className="text-[13.5px] font-semibold text-ink">{featured.authorName}</p>
-                        <p className="text-[12px] text-ink-muted">
-                          <time dateTime={featured.datePublished}>{formatReviewDate(featured.datePublished)}</time>
+                        <p
+                          className="text-ink"
+                          style={{ fontSize: "13px", fontWeight: 600 }}
+                        >
+                          {featured.authorName}
+                        </p>
+                        <p
+                          className="mt-0.5 text-ink-muted"
+                          style={{ fontSize: "11.5px" }}
+                        >
+                          <time dateTime={featured.datePublished}>
+                            {formatReviewDate(featured.datePublished)}
+                          </time>
                           {" · Google"}
                         </p>
                       </div>
@@ -568,25 +770,57 @@ export default function HomePage() {
                   </figure>
                 </SectionReveal>
 
-                {/* Remaining reviews in grid */}
+                {/* Secondary reviews */}
                 {rest.length > 0 && (
                   <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
                     {rest.map((r, i) => (
-                      <SectionReveal key={`${r.authorName}-${r.datePublished}`} delay={(i + 1) * 0.07}>
-                        <figure className="flex h-full flex-col rounded-[1.25rem] border border-black/[0.06] bg-white/80 p-7 shadow-[0_4px_24px_rgba(30,110,72,0.07)] backdrop-blur-sm sm:p-8">
-                          <div className="mb-3 flex items-center gap-2">
+                      <SectionReveal
+                        key={`${r.authorName}-${r.datePublished}`}
+                        delay={(i + 1) * 0.07}
+                      >
+                        <figure
+                          className="flex h-full flex-col rounded-[4px] border p-7 sm:p-8"
+                          style={{
+                            background: "#ffffff",
+                            borderColor: "rgba(0,0,0,0.06)",
+                            boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+                          }}
+                        >
+                          <div className="mb-4 flex items-center gap-2">
                             <StarRow rating={r.reviewRating} />
                             <span className="sr-only">{r.reviewRating} von 5 Sternen</span>
                           </div>
                           <blockquote className="flex-1">
-                            <p className="whitespace-pre-line text-[15px] italic leading-[1.78] text-ink">
+                            <p
+                              className="whitespace-pre-line text-ink"
+                              style={{
+                                fontFamily: "var(--font-cormorant)",
+                                fontWeight: 300,
+                                fontStyle: "italic",
+                                fontSize: "clamp(1.05rem, 2.2vw, 1.2rem)",
+                                lineHeight: 1.65,
+                              }}
+                            >
                               {r.reviewBody}
                             </p>
                           </blockquote>
-                          <figcaption className="mt-5 border-t border-black/[0.06] pt-4">
-                            <p className="text-[13px] font-semibold text-ink">{r.authorName}</p>
-                            <p className="mt-0.5 text-[12px] text-ink-muted">
-                              <time dateTime={r.datePublished}>{formatReviewDate(r.datePublished)}</time>
+                          <figcaption
+                            className="mt-5 border-t pt-4"
+                            style={{ borderColor: "rgba(0,0,0,0.06)" }}
+                          >
+                            <p
+                              className="text-ink"
+                              style={{ fontSize: "13.5px", fontWeight: 600 }}
+                            >
+                              {r.authorName}
+                            </p>
+                            <p
+                              className="mt-0.5 text-ink-muted"
+                              style={{ fontSize: "12.5px" }}
+                            >
+                              <time dateTime={r.datePublished}>
+                                {formatReviewDate(r.datePublished)}
+                              </time>
                               {" · Google"}
                             </p>
                           </figcaption>
@@ -600,64 +834,134 @@ export default function HomePage() {
               <SectionReveal delay={0.15} className="mt-10 text-center">
                 <Link
                   href="/bewertungen"
-                  className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-brand/30 bg-brand/7 px-6 text-[13.5px] font-semibold text-brand transition hover:border-brand/50 hover:bg-brand/12"
+                  className="inline-flex min-h-[44px] items-center gap-1.5 rounded-[4px] border px-6 text-[13.5px] font-semibold text-brand transition hover:border-brand/40 hover:bg-brand/5"
+                  style={{ borderColor: "rgba(58,92,61,0.28)" }}
                 >
                   Alle Bewertungen ansehen
                   <span aria-hidden>→</span>
                 </Link>
               </SectionReveal>
             </div>
-          </EmotionalSection>
+          </section>
         );
       })()}
 
-      {/* ── S9: PRAKTISCHE INFOS ────────────────── */}
-      <section className="py-16 sm:py-20 md:py-28">
+      {/* ── S9: PRAKTISCHE INFOS — warm sand, leads into dark CTA ── */}
+      <section
+        className="py-20 sm:py-24 md:py-32"
+        style={{
+          background: "linear-gradient(180deg, #f5ece0 0%, #f2e9dc 100%)",
+        }}
+      >
         <div className="page-gutter mx-auto w-full max-w-[var(--layout-max)]">
           <SectionReveal>
             <p className="section-eyebrow">Praktische Infos</p>
             <h2 className="section-title mt-2">Krankenkasse & Anreise</h2>
           </SectionReveal>
 
-          <div className="mt-12 grid gap-8 sm:mt-14 md:grid-cols-2 md:gap-12">
-            <SectionReveal delay={0.04}>
-              <div className="rounded-[1.25rem] border border-black/[0.07] bg-white p-7 shadow-[0_4px_24px_rgba(30,110,72,0.06)] sm:p-8">
-                <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-ink">
+          <div className="mt-12 grid gap-6 sm:mt-14 md:grid-cols-2 md:gap-8">
+            <SectionReveal delay={0.05}>
+              <div
+                className="rounded-[4px] border p-7 sm:p-8"
+                style={{
+                  background: "rgba(253,250,245,0.85)",
+                  backdropFilter: "blur(4px)",
+                  borderColor: "rgba(0,0,0,0.07)",
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+                }}
+              >
+                <h3
+                  className="text-ink"
+                  style={{ fontSize: "1.0625rem", fontWeight: 500, letterSpacing: "-0.01em" }}
+                >
                   Krankenkasse & Abrechnung
                 </h3>
-                <p className="mt-4 text-[14.5px] leading-[1.78] text-ink-muted">
-                  Die Kinesiologie ist eine anerkannte Methode der Komplementärtherapie. Ich bin EMR-zertifiziert, weshalb die Kosten in der Regel über die Zusatzversicherung abgerechnet werden können. Bitte kläre dies vorab mit deiner Kasse.
+                <p
+                  className="mt-4 text-ink-muted"
+                  style={{ fontSize: "15.5px", lineHeight: 1.78 }}
+                >
+                  Die Kinesiologie ist eine anerkannte Methode der
+                  Komplementärtherapie. Ich bin EMR-zertifiziert, weshalb die
+                  Kosten in der Regel über die Zusatzversicherung abgerechnet
+                  werden können. Bitte kläre dies vorab mit deiner Kasse.
                 </p>
-                <p className="mt-3 text-[14.5px] leading-[1.78] text-ink-muted">
-                  Als Partnerin von CSS Coin biete ich entsprechende Vorteile für CSS-Versicherte.
+                <p
+                  className="mt-3 text-ink-muted"
+                  style={{ fontSize: "15.5px", lineHeight: 1.78 }}
+                >
+                  Als Partnerin von CSS Coin biete ich entsprechende Vorteile für
+                  CSS-Versicherte.
                 </p>
                 <div className="mt-7 flex flex-wrap items-center gap-6">
-                  <Image src="/images/legacy/logos/emr-zertifiziert.png" alt="EMR zertifiziert" width={130} height={40} className="opacity-65" />
-                  <Image src="/images/legacy/logos/kinesuisse.png" alt="KineSuisse" width={120} height={38} className="opacity-65" />
+                  <Image
+                    src="/images/legacy/logos/emr-zertifiziert.png"
+                    alt="EMR zertifiziert"
+                    width={130}
+                    height={40}
+                    className="opacity-50"
+                  />
+                  <Image
+                    src="/images/legacy/logos/kinesuisse.png"
+                    alt="KineSuisse"
+                    width={120}
+                    height={38}
+                    className="opacity-50"
+                  />
                 </div>
               </div>
             </SectionReveal>
 
-            <SectionReveal delay={0.09}>
-              <div className="rounded-[1.25rem] border border-black/[0.07] bg-white p-7 shadow-[0_4px_24px_rgba(30,110,72,0.06)] sm:p-8">
-                <h3 className="text-[1rem] font-semibold tracking-[-0.02em] text-ink">
+            <SectionReveal delay={0.1}>
+              <div
+                className="rounded-[4px] border p-7 sm:p-8"
+                style={{
+                  background: "rgba(253,250,245,0.85)",
+                  backdropFilter: "blur(4px)",
+                  borderColor: "rgba(0,0,0,0.07)",
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+                }}
+              >
+                <h3
+                  className="text-ink"
+                  style={{ fontSize: "1.0625rem", fontWeight: 500, letterSpacing: "-0.01em" }}
+                >
                   Anreise & Standort
                 </h3>
-                <p className="mt-4 text-[14.5px] leading-[1.78] text-ink-muted">
+                <p
+                  className="mt-4 text-ink-muted"
+                  style={{ fontSize: "15.5px", lineHeight: 1.78 }}
+                >
                   Praxis an der{" "}
-                  <strong className="font-semibold text-ink">Meggerstrasse 4a in Adligenswil.</strong>{" "}
+                  <strong className="font-medium text-ink">
+                    Meggerstrasse 4a in Adligenswil.
+                  </strong>{" "}
                   Kostenlose Parkplätze direkt vor dem Haus.
                 </p>
-                <p className="mt-3 text-[14.5px] leading-[1.78] text-ink-muted">
-                  Mit dem ÖV: Postauto 73 bis Haltestelle <em>«Sagi»</em>.
+                <p
+                  className="mt-3 text-ink-muted"
+                  style={{ fontSize: "15.5px", lineHeight: 1.78 }}
+                >
+                  Mit dem ÖV: Postauto 73 bis Haltestelle{" "}
+                  <em>«Sagi»</em>.
                 </p>
                 <a
                   href={site.mapsDirectionsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-7 inline-flex min-h-[44px] items-center gap-2 rounded-full border border-brand/30 bg-brand/7 px-5 text-[13.5px] font-semibold text-brand transition hover:border-brand/50 hover:bg-brand/12"
+                  className="mt-7 inline-flex h-[42px] items-center gap-2 rounded-[4px] border px-5 text-[11.5px] font-semibold uppercase tracking-[0.08em] text-ink transition hover:border-black/[0.2] hover:bg-black/[0.03]"
+                  style={{ borderColor: "rgba(0,0,0,0.12)" }}
                 >
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden
+                  >
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
                     <circle cx="12" cy="9" r="2.5" />
                   </svg>
@@ -669,66 +973,129 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── S10: FINAL CTA — with Claudia portrait ────────────── */}
-      <section className="relative overflow-hidden py-20 text-white sm:py-24 md:py-32" style={{ background: '#1e6e48' }}>
-        {/* Large blush blob — top right */}
+      {/* ── S10: FINAL CTA — dark forest, echoes hero ── */}
+      <section
+        className="relative overflow-hidden py-28 sm:py-32 md:py-40"
+        style={{
+          background: "linear-gradient(160deg, #0e1a10 0%, #0b1509 100%)",
+        }}
+      >
+        {/* Warm glows */}
         <div
-          className="pointer-events-none absolute -right-24 -top-24 h-[480px] w-[480px] rounded-full blur-[90px]"
-          style={{ background: '#f2d5dc', opacity: 0.32 }}
+          className="pointer-events-none absolute -right-36 -top-36 h-[520px] w-[520px] rounded-full blur-[130px]"
+          style={{ background: "rgba(58,92,61,0.22)" }}
           aria-hidden
         />
-        {/* Smaller blush blob — bottom left */}
         <div
-          className="pointer-events-none absolute -bottom-20 -left-20 h-[320px] w-[320px] rounded-full blur-[70px]"
-          style={{ background: '#f2d5dc', opacity: 0.18 }}
+          className="pointer-events-none absolute -bottom-28 -left-28 h-[380px] w-[380px] rounded-full blur-[110px]"
+          style={{ background: "rgba(158,110,88,0.13)" }}
           aria-hidden
         />
-        {/* Soft white radial highlight behind text */}
+        {/* Grain */}
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_60%_at_50%_50%,rgba(255,255,255,0.07),transparent)]"
+          className="pointer-events-none absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          }}
           aria-hidden
         />
 
         <div className="page-gutter relative z-[1] mx-auto w-full max-w-[var(--layout-narrow)] text-center">
           <SectionReveal>
-            {/* Claudia portrait — personal closing touch */}
+            {/* Claudia avatar */}
             <div className="flex justify-center">
-              <div className="relative h-24 w-24 overflow-hidden rounded-full border-[3px] border-white/42 shadow-[0_4px_32px_rgba(0,0,0,0.28),0_0_0_6px_rgba(255,255,255,0.08)]">
+              <div
+                className="relative h-20 w-20 overflow-hidden rounded-full"
+                style={{
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  boxShadow: "0 4px 40px rgba(0,0,0,0.5)",
+                }}
+              >
                 <Image
                   src="/images/legacy/wp/2022/10/claudia_dimmler_cj_2022-140_klein.jpg"
                   alt="Claudia Dimmler"
                   fill
                   className="object-cover object-top"
-                  sizes="96px"
+                  sizes="80px"
                 />
               </div>
             </div>
 
-            <p className="mt-7 text-[11px] font-semibold uppercase tracking-[0.32em] text-white/58">
+            <p
+              className="mt-8 uppercase"
+              style={{
+                fontSize: "9.5px",
+                fontWeight: 600,
+                letterSpacing: "0.3em",
+                color: "rgba(255,255,255,0.35)",
+              }}
+            >
               Nächster Schritt
             </p>
-            <h2 className="mt-4 text-balance text-[1.8rem] font-semibold leading-[1.1] tracking-[-0.03em] sm:text-[2.4rem] md:text-[3rem]">
-              Bereit für den nächsten Schritt?
+
+            <h2
+              className="mt-5 text-balance text-white"
+              style={{
+                fontFamily: "var(--font-cormorant)",
+                fontWeight: 300,
+                fontSize: "clamp(2.4rem, 5.5vw, 4.2rem)",
+                lineHeight: 1.06,
+                letterSpacing: "0.005em",
+              }}
+            >
+              Bereit für deinen
+              <br />
+              <em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.65)" }}>
+                ersten Schritt?
+              </em>
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-[16px] leading-[1.72] text-white/80">
-              Egal ob du Entspannung suchst oder gezielt an einem gesundheitlichen Thema arbeiten möchtest — ich freue mich auf dich.
+
+            <p
+              className="mx-auto mt-7"
+              style={{
+                fontSize: "15.5px",
+                lineHeight: 1.78,
+                color: "rgba(255,255,255,0.52)",
+                maxWidth: "42ch",
+              }}
+            >
+              Egal ob du Entspannung suchst oder gezielt an einem
+              gesundheitlichen Thema arbeiten möchtest — ich freue mich
+              auf dich.
             </p>
 
             <a
               href={site.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-9 inline-flex min-h-[54px] items-center justify-center rounded-full bg-white px-8 text-[15.5px] font-semibold text-brand shadow-[0_6px_32px_rgba(0,0,0,0.22)] transition hover:bg-brand-soft hover:shadow-[0_8px_40px_rgba(0,0,0,0.28)] active:scale-[0.98]"
+              className="group mt-11 inline-flex h-[52px] items-center justify-center gap-3 rounded-[4px] bg-[var(--paper)] px-9 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-ink transition-all duration-300 hover:bg-white active:scale-[0.97]"
+              style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.42)" }}
             >
-              Ersten Termin online buchen
+              Termin online buchen
+              <span
+                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-black/6 transition-transform duration-300 group-hover:translate-x-0.5"
+                aria-hidden
+              >
+                →
+              </span>
             </a>
 
-            <p className="mt-7 text-[14px] text-white/62">
-              <a href={`tel:${site.phoneTel}`} className="transition hover:text-white/90">
+            <p
+              className="mt-9"
+              style={{ fontSize: "13px", color: "rgba(255,255,255,0.3)" }}
+            >
+              <a
+                href={`tel:${site.phoneTel}`}
+                className="transition hover:text-white/55"
+              >
                 {site.phone}
               </a>
-              {" "}&middot;{" "}
-              <a href={`mailto:${site.email}`} className="transition hover:text-white/90">
+              {" · "}
+              <a
+                href={`mailto:${site.email}`}
+                className="transition hover:text-white/55"
+              >
                 {site.email}
               </a>
             </p>
