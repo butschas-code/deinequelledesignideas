@@ -93,10 +93,10 @@ function ServiceCard({
         >
           {title}
         </h3>
-        <p className="mt-3 flex-1 text-[15.5px] leading-[1.76] text-ink-muted">{body}</p>
+        <p className="mt-3 flex-1 text-[16.5px] leading-[1.76] text-ink-muted">{body}</p>
         <Link
           href={href}
-          className="mt-6 inline-flex items-center gap-1.5 text-[11.5px] font-semibold uppercase tracking-[0.1em] transition-all duration-200 group/link hover:gap-2.5"
+          className="mt-6 inline-flex items-center gap-1.5 text-[12.5px] font-semibold uppercase tracking-[0.1em] transition-all duration-200 group/link hover:gap-2.5"
           style={{ color: "var(--brand)" }}
         >
           {linkLabel.replace(/^→\s*/, "")}
@@ -164,7 +164,7 @@ function WirkungCard({
               />
               <span
                 className="text-ink"
-                style={{ fontSize: "14.5px", lineHeight: 1.42, opacity: 0.84 }}
+                style={{ fontSize: "15.5px", lineHeight: 1.42, opacity: 0.84 }}
               >
                 {item}
               </span>
@@ -393,7 +393,7 @@ export default function HomePage() {
                   <li
                     key={item}
                     className="flex items-center gap-3"
-                    style={{ fontSize: "15.5px", color: "var(--ink-muted)" }}
+                    style={{ fontSize: "16.5px", color: "var(--ink-muted)" }}
                   >
                     <span
                       className="h-px w-4 shrink-0"
@@ -408,7 +408,7 @@ export default function HomePage() {
               <div className="mt-10">
                 <Link
                   href="/ueber-mich"
-                  className="group inline-flex h-[46px] items-center gap-3 rounded-[4px] border px-6 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-ink transition-all duration-300 hover:border-brand/30 hover:bg-brand/5"
+                  className="group inline-flex h-[46px] items-center gap-3 rounded-[4px] border px-6 text-[12.5px] font-semibold uppercase tracking-[0.1em] text-ink transition-all duration-300 hover:border-brand/30 hover:bg-brand/5"
                   style={{ borderColor: "rgba(0,0,0,0.12)" }}
                 >
                   Mehr über mich
@@ -498,7 +498,7 @@ export default function HomePage() {
                         href={step.cta.href}
                         target={step.cta.external ? "_blank" : undefined}
                         rel={step.cta.external ? "noopener noreferrer" : undefined}
-                        className="mt-6 inline-flex h-[42px] items-center rounded-[4px] bg-brand px-5 text-[11.5px] font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-brand-hover"
+                        className="mt-6 inline-flex h-[42px] items-center rounded-[4px] bg-brand px-5 text-[12.5px] font-semibold uppercase tracking-[0.08em] text-white transition hover:bg-brand-hover"
                       >
                         {step.cta.label}
                       </a>
@@ -878,7 +878,7 @@ export default function HomePage() {
                 </h3>
                 <p
                   className="mt-4 text-ink-muted"
-                  style={{ fontSize: "15.5px", lineHeight: 1.78 }}
+                  style={{ fontSize: "16.5px", lineHeight: 1.78 }}
                 >
                   Die Kinesiologie ist eine anerkannte Methode der
                   Komplementärtherapie. Ich bin EMR-zertifiziert, weshalb die
@@ -887,7 +887,7 @@ export default function HomePage() {
                 </p>
                 <p
                   className="mt-3 text-ink-muted"
-                  style={{ fontSize: "15.5px", lineHeight: 1.78 }}
+                  style={{ fontSize: "16.5px", lineHeight: 1.78 }}
                 >
                   Als Partnerin von CSS Coin biete ich entsprechende Vorteile für
                   CSS-Versicherte.
@@ -929,7 +929,7 @@ export default function HomePage() {
                 </h3>
                 <p
                   className="mt-4 text-ink-muted"
-                  style={{ fontSize: "15.5px", lineHeight: 1.78 }}
+                  style={{ fontSize: "16.5px", lineHeight: 1.78 }}
                 >
                   Praxis an der{" "}
                   <strong className="font-medium text-ink">
@@ -939,7 +939,7 @@ export default function HomePage() {
                 </p>
                 <p
                   className="mt-3 text-ink-muted"
-                  style={{ fontSize: "15.5px", lineHeight: 1.78 }}
+                  style={{ fontSize: "16.5px", lineHeight: 1.78 }}
                 >
                   Mit dem ÖV: Postauto 73 bis Haltestelle{" "}
                   <em>«Sagi»</em>.
@@ -948,7 +948,7 @@ export default function HomePage() {
                   href={site.mapsDirectionsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-7 inline-flex h-[42px] items-center gap-2 rounded-[4px] border px-5 text-[11.5px] font-semibold uppercase tracking-[0.08em] text-ink transition hover:border-black/[0.2] hover:bg-black/[0.03]"
+                  className="mt-7 inline-flex h-[42px] items-center gap-2 rounded-[4px] border px-5 text-[12.5px] font-semibold uppercase tracking-[0.08em] text-ink transition hover:border-black/[0.2] hover:bg-black/[0.03]"
                   style={{ borderColor: "rgba(0,0,0,0.12)" }}
                 >
                   <svg
@@ -1054,7 +1054,7 @@ export default function HomePage() {
             <p
               className="mx-auto mt-7"
               style={{
-                fontSize: "15.5px",
+                fontSize: "16.5px",
                 lineHeight: 1.78,
                 color: "rgba(255,255,255,0.52)",
                 maxWidth: "42ch",
@@ -1069,7 +1069,7 @@ export default function HomePage() {
               href={site.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-11 inline-flex h-[52px] items-center justify-center gap-3 rounded-[4px] bg-[var(--paper)] px-9 text-[11.5px] font-semibold uppercase tracking-[0.1em] text-ink transition-all duration-300 hover:bg-white active:scale-[0.97]"
+              className="group mt-11 inline-flex h-[52px] items-center justify-center gap-3 rounded-[4px] bg-[var(--paper)] px-9 text-[12.5px] font-semibold uppercase tracking-[0.1em] text-ink transition-all duration-300 hover:bg-white active:scale-[0.97]"
               style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.42)" }}
             >
               Termin online buchen

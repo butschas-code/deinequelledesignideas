@@ -116,7 +116,7 @@ export function SiteHeader() {
                 <div key={item.label} className="group relative">
                   <button
                     type="button"
-                    className="-my-1 inline-flex items-center gap-1 rounded-[4px] px-2.5 py-2 text-[13px] font-medium text-ink-muted transition-colors duration-200 hover:bg-black/[0.04] hover:text-ink"
+                    className="-my-1 inline-flex items-center gap-1 rounded-[4px] px-2.5 py-2 text-[15px] font-medium text-ink-muted transition-colors duration-200 hover:bg-black/[0.04] hover:text-ink"
                     aria-haspopup="menu"
                     aria-controls={leistungenMenuId}
                   >
@@ -145,7 +145,7 @@ export function SiteHeader() {
                           <Link
                             href={sub.href}
                             role="menuitem"
-                            className="block px-4 py-3 text-[13px] font-medium text-ink-muted transition-colors hover:bg-brand-soft hover:text-ink"
+                            className="block px-4 py-3 text-[15px] font-medium text-ink-muted transition-colors hover:bg-brand-soft hover:text-ink"
                           >
                             {sub.label}
                           </Link>
@@ -158,7 +158,7 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="-my-1 whitespace-nowrap rounded-[4px] px-2.5 py-2 text-[13px] font-medium text-ink-muted transition-colors duration-200 hover:bg-black/[0.04] hover:text-ink"
+                  className="-my-1 whitespace-nowrap rounded-[4px] px-2.5 py-2 text-[15px] font-medium text-ink-muted transition-colors duration-200 hover:bg-black/[0.04] hover:text-ink"
                 >
                   {item.label}
                 </Link>
@@ -168,7 +168,7 @@ export function SiteHeader() {
               href={site.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 rounded-[4px] bg-brand px-5 py-2.5 text-[13px] font-semibold text-white shadow-sm transition duration-200 hover:bg-brand-hover"
+              className="shrink-0 rounded-[4px] bg-brand px-5 py-2.5 text-[14px] font-semibold text-white shadow-sm transition duration-200 hover:bg-brand-hover"
             >
               Termin buchen
             </Link>
@@ -186,7 +186,7 @@ export function SiteHeader() {
             </Link>
             <button
               type="button"
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-[4px] border border-black/10 px-3 text-[13px] font-medium text-ink transition hover:bg-black/[0.03] sm:min-w-0 sm:px-4"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-[4px] border border-black/10 px-3 text-[15px] font-medium text-ink transition hover:bg-black/[0.03] sm:min-w-0 sm:px-4"
               aria-expanded={open}
               aria-controls="mobile-nav"
               onClick={() => setOpen((o) => !o)}
@@ -216,14 +216,14 @@ export function SiteHeader() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.04 }}
                     >
-                      <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-complimentary">
+                      <p className="px-3 pb-1 pt-2 text-[12px] font-semibold uppercase tracking-[0.2em] text-brand-complimentary">
                         {item.label}
                       </p>
                       {item.children.map((sub) => (
                         <Link
                           key={sub.href}
                           href={sub.href}
-                          className="flex min-h-[48px] items-center rounded-[4px] py-2 pl-8 pr-3 text-[15px] text-ink-muted transition hover:bg-paper hover:text-ink"
+                          className="flex min-h-[48px] items-center rounded-[4px] py-2 pl-8 pr-3 text-[17px] text-ink-muted transition hover:bg-paper hover:text-ink"
                           onClick={() => setOpen(false)}
                         >
                           {sub.label}
@@ -239,7 +239,7 @@ export function SiteHeader() {
                     >
                       <Link
                         href={item.href}
-                        className="flex min-h-[48px] items-center rounded-[4px] px-3 py-2.5 text-[15px] text-ink-muted transition hover:bg-paper hover:text-ink"
+                        className="flex min-h-[48px] items-center rounded-[4px] px-3 py-2.5 text-[17px] text-ink-muted transition hover:bg-paper hover:text-ink"
                         onClick={() => setOpen(false)}
                       >
                         {item.label}

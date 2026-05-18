@@ -185,7 +185,7 @@ export function StorybrandHero() {
                 padding: "0 1.75rem",
                 background: "rgba(253,250,245,0.95)",
                 boxShadow: "0 4px 32px rgba(0,0,0,0.35)",
-                fontSize: "11.5px",
+                fontSize: "12.5px",
                 fontWeight: 600,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase" as const,
@@ -202,7 +202,7 @@ export function StorybrandHero() {
             </a>
             <Link
               href="/ueber-mich"
-              className="inline-flex h-[50px] items-center gap-1 px-2 text-[13px] font-medium transition-opacity duration-200 hover:opacity-80"
+              className="inline-flex h-[50px] items-center gap-1 px-2 text-[15px] font-medium transition-opacity duration-200 hover:opacity-80"
               style={{ color: "rgba(255,255,255,0.42)" }}
             >
               Mehr erfahren
